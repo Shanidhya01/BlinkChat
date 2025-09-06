@@ -3,7 +3,7 @@ import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
-const BASE_URL = import.meta.env.MODE === 'development' ? "http://localhost:5001" : "/";
+const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:5001" : "/";
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,
@@ -16,19 +16,12 @@ export const useAuthStore = create((set, get) => ({
 
   checkAuth: async () => {
     try {
-      console.log("checkAuth -> requesting:", axiosInstance.defaults.baseURL + "/auth/check");
       const res = await axiosInstance.get("/auth/check");
-      console.log("checkAuth response status:", res.status, "type:", typeof res.data);
-      // guard: if server returned HTML string, treat as failure
-      if (typeof res.data === "string" && res.data.startsWith("<!DOCTYPE")) {
-        console.error("checkAuth: server returned HTML instead of JSON");
-        set({ authUser: null });
-      } else {
-        set({ authUser: res?.data || null });
-        if (res?.data) get().connectSocket();
-      }
+
+      set({ authUser: res.data });
+      get().connectSocket();
     } catch (error) {
-      console.error("Error in checkAuth:", error);
+      console.log("Error in checkAuth:", error);
       set({ authUser: null });
     } finally {
       set({ isCheckingAuth: false });
