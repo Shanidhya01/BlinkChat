@@ -23,7 +23,8 @@ app.use(
     origin: [
       "http://localhost:5173",                     // local dev
       "https://blink-chat-xi.vercel.app",          // old vercel deploy
-      "https://blinkchat-frontend.netlify.app"     // ✅ Netlify deploy
+      "https://blinkchat-frontend.netlify.app",     // ✅ Netlify deploy
+      "https://blink-chat-front.netlify.app"      // ✅ Netlify deploy alternative
     ],
     credentials: true,
   })
