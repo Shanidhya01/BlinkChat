@@ -1,13 +1,6 @@
-import axios from "axios";
-
-const raw = "https://blink-chat-backend-silk.vercel.app" || "http://localhost:5001";
-const base = raw.replace(/\/$/, "") + "/api";
-
-console.log("AXIOS baseURL:", base);
+import axios from 'axios';
 
 export const axiosInstance = axios.create({
-  baseURL: base,
+  baseURL: import.meta.env.MODE === 'development' ? 'http://localhost:5000/api' : "/api",
   withCredentials: true,
-});
-
-export default axiosInstance;
+})
