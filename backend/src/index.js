@@ -30,10 +30,6 @@ app.use(
   })
 );
 
-app.get('/', (req, res) => {
-  res.status(200).send('BlinkChat backend is running');
-});
-
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
