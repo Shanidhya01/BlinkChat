@@ -7,7 +7,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ["https://blink-chat-xi.vercel.app", "http://localhost:5173"],
+    origin: ["https://blink-chat-front.netlify.app/", "http://localhost:5173"],
   },
 });
 
